@@ -1,8 +1,6 @@
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 
 
-@python_2_unicode_compatible
 class Album(models.Model):
     """Create an album in music table."""
     artist = models.CharField(max_length=250)
@@ -14,12 +12,12 @@ class Album(models.Model):
         return self.album_title + ", Artist: " + self.artist
 
 
-@python_2_unicode_compatible
 class Song(models.Model):
     """Create a song linked with Album"""
     album = models.ForeignKey(Album, on_delete=models.CASCADE)
     file_type = models.CharField(max_length=10)
     song_title = models.CharField(max_length=250)
+    is_favorite = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.song_title + ", Album: " + self.album
+        return self.song_title
